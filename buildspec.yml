@@ -1,0 +1,19 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_REPO: brandonsecid/securingdevopsbook
+    IMAGE_TAG: latest
+phases:
+  install:
+    commands:
+      - echo Logging into Docker
+      - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  pre_build:
+    commands:
+      - echo buiding the docker image
+      - docker build -t $IMAGE_REPO:$IMAGE_TAG .
+  build:
+    commands:
+      - echo Pushing build
+      - docker push $IMAGE_REPO:$IMAGE_TAG
