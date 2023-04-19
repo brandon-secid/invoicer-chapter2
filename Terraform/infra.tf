@@ -12,12 +12,12 @@ resource "aws_db_instance" "default" {
   engine_version       = "9.6.22"
   instance_class       = "db.t3.micro"
   identifier           = "invoicer-db"
-  multi_az             = false
+  multi_az             = true
   name                 = "invoicer"
   username             = "invoicer"
   password             = var.DB_PASS
-  publicly_accessible =  true
   skip_final_snapshot  = true
   vpc_security_group_ids = ["${aws_security_group.rds_sg.id}"]
-  iam_database_authentication_enabled = true
+  auto_minor_version_upgrade = true
+  monitoring_interval = true
 }
